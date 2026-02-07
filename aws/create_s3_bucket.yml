@@ -1,0 +1,21 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+
+Description:
+  Creates an S3 bucket for the data lakehouse.
+
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: YOUR_BUCKET_NAME
+      Tags: 
+        - Key: project
+          Value: YOUR_BUCKET_NAME
+
+Outputs:
+  S3Bucket:
+    Description: S3 bucket created.
+    Value: !Ref S3Bucket
+  
+
