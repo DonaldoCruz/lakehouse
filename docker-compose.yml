@@ -1,0 +1,8 @@
+name: ecommerce_lakehouse
+
+services:
+  nessier_server:
+    image: ghcr.io/projectnessie/nessie
+    ports:
+      - "19120:19120"
+
