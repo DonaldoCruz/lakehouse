@@ -1,8 +1,36 @@
 name: ecommerce_lakehouse
 
 services:
-  nessier_server:
+  nessie-server:
     image: ghcr.io/projectnessie/nessie
     ports:
       - "19120:19120"
+    environment:
+      - NESSIE_VERSION_STORE_TYPE=ROCKSDB
+    volumes:
+      - nessie-data:/nessie/data
+    
+  trino-coordinator:
+    image: trinodb/trino
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./trino_config/coordinator/config.properties:/etc/trino/config.properties
+      - ./trino_config/catalog/:/etc/trino/catalog
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
 
+  trino-worker:
+    image: trinodb/trino
+    volumes:
+      - ./trino_config/worker/config.properties:/etc/trino/config.properties
+      - ./trino_config/catalog/:/etc/trino/catalog
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+    depends_on:
+      - trino-coordinator
+  
+volumes:
+  nessie-data:
