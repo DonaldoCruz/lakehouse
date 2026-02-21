@@ -1,0 +1,34 @@
+
+snapshots:
+  - name: snap_customer
+    relation: ref('stg_customers')
+    description: >
+      Tracks changes to customer location fields.
+      When city, state, or zip_code_prefix changes:
+      - Current record gets dbt_valid_to set to current timestamp
+      - New record inserted with dbt_valid_from = current timestamp, dbt_valid_to = null
+
+      Result columns added by dbt:
+      - dbt_scd_id: Unique identifier for each version
+      - dbt_updated_at: When this version was created
+      - dbt_valid_from: When this version became active
+      - dbt_valid_to: When this version was superseded (null if current)
+    config:
+      database: iceberg
+      schema: silver
+      unique_key: customer_id
+      strategy: check
+      check_cols:
+        - city
+        - state
+        - zip_code_prefix
+      hard_deletes: invalidate
+      columns:
+        - name: customer_id
+        - name: customer_unique_id
+        - name: zip_code_prefix,
+        - name: city,
+        - name: state,
+        - name: _ingested_at,
+    
+        
