@@ -1,0 +1,13 @@
+# Not best practices, it is recommended that profiles.yml go in ~/.dbt/
+
+local_trino_connection:
+  target: dev
+  outputs:
+    dev:
+      type: trino
+      host: http://localhost
+      database: iceberg
+      schema: bronze
+      port: 8080
+      user: trino
+      threads: 4

@@ -1,0 +1,26 @@
+name: 'dbt_warehouse'
+version: '1.0.0'
+
+# This setting configures which "profile" dbt uses for this project.
+profile: 'local_trino_connection'
+
+model-paths: ["models"]
+snapshot-paths: ["snapshots"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+
+models:
+  dbt_warehouse:
+    staging: 
+      +materialized: table
+      +schema: staging
+    dimensions:
+      +materialized: table
+      +schema: silver
+    facts:
+      +materialized: table
+      +schema: gold
+    aggregates:
+      +materialized: table
+      +schema: gold
+      
