@@ -1,0 +1,35 @@
+
+sources:
+  - name: bronze
+    description: "Raw data ingested by spark."
+    database: iceberg
+    schema: bronze
+    tables:
+      - name: orders
+        description: "Order headers with status and timestamps"
+        columns: 
+          - name: order_id
+            data_tests:
+              - unique
+              - not_null
+      - name: customers
+        description: "Customer information"
+        columns:
+          - name: customer_id
+            data_tests:
+              - unique
+              - not_null
+      - name: order_items
+        description: "Order line items"
+      - name: products
+        description: "Product catalog"
+      - name: sellers
+        description: "Seller information"
+      - name: reviews
+        description: "Order reviews and ratings"
+      - name: payments
+        description: "Payment information"
+      - name: category_translation
+        description: "Product category Portuguese to English."
+      - name: geolocation
+        description: "Coordinates in Brazil."

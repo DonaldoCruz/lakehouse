@@ -1,0 +1,44 @@
+
+version: 2
+
+models:
+  - name: dim_customer
+    description: "Customer dimension with SCD Type 2 for location changes"
+    columns:
+      - name: customer_sk
+        description: "Surrogate key - unique per customer version"
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: "Natural key - not unique due to SCD type 2"
+        data_tests:
+          - not_null
+      - name: is_current
+        description: "True if this is the current version of the customer"
+        data_tests:
+          - not_null
+
+  - name: dim_product
+    description: "Product dimension with size classification"
+    columns:
+      - name: product_sk
+        data_tests:
+          - unique
+          - not_null
+
+  - name: dim_seller
+    description: "Seller dimension with performance metrics and tier"
+    columns:
+      - name: seller_sk
+        data_tests:
+          -  unique
+          - not_null
+
+  - name: dim_date
+    description: "Date dimension covering 2016-2019"
+    columns:
+      - name: date_sk
+        data_tests:
+          - unique
+          - not_null

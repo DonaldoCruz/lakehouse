@@ -1,0 +1,20 @@
+
+models:
+  - name: agg_daily_sales
+    description: "Pre-aggregated daily sales metrics for dashboard performance"
+    columns:
+      - name: order_date_sk
+        data_tests:
+          - unique
+          - not_null
+      - name: total_revenue
+        data_tests:
+          - not_null
+
+  - name: agg_seller_performance
+    description: "Seller-level performance metrics"
+    columns:
+      - name: seller_sk
+        data_tests:
+          - unique
+          - not_null

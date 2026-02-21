@@ -1,0 +1,61 @@
+
+version: 2
+
+models:
+  - name: stg_orders
+    description: "Cleaned order headers with parsed timestamps"
+    columns:
+      - name: order_id
+        description: "Primary key"
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_id
+        data_tests:
+          - not_null
+      - name: order_status
+        data_tests:
+          - accepted_values:
+              values: ['delivered', 'shipped', 'canceled', 'unavailable', 'invoiced', 'processing', 'created', 'approved']
+  
+  - name: stg_order_items
+    description: "Cleaned order line items with calculated totals"
+    columns:
+      - name: order_id
+        data_tests:
+          - not_null
+      - name: price
+        data_tests:
+          - not_null
+          
+  - name: stg_customers
+    description: "Deduplicated customer records"
+    columns:
+      - name: customer_id
+        data_tests:
+          - unique
+          - not_null
+
+  - name: stg_products
+    description: "Products with English category names"
+    columns: 
+      - name: product_id
+        data_tests:
+          - unique
+          - not_null
+  
+  - name: stg_sellers
+    description: "Cleaned seller information"
+    columns:
+      - name: seller_id
+        data_tests:
+          - unique
+          - not_null
+  
+  - name: stg_reviews
+    description: "Reviews with sentiment categorization"
+    columns:
+      - name: review_id
+        data_tests:
+          - unique
+          - not_null

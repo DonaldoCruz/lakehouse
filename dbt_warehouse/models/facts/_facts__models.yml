@@ -1,0 +1,33 @@
+
+version: 2
+
+models:
+  - name: fct_orders
+    description: "Order-level fact table with delivery metrics and totals"
+    columns:
+      - name: order_id
+        description: "Degenerate dimension - order identifier"
+        data_tests:
+          - unique
+          - not_null
+      - name: order_total
+        data_tests:
+          - not_null
+
+  - name: fct_order_items
+    description: "Line-item level fact table for product/seller analysis"
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - order_id
+            - order_item_id
+          
+  - name: fct_reviews
+    description: "Review fact table with sentiment and response metrics"
+    columns:
+      - name: review_id
+        data_tests:
+          - unique
+          - not_null
+
+        
