@@ -2,3 +2,11 @@
 *.log
 *.egg-info/
 .env
+
+# Dbt.
+target/
+dbt_packages/
+logs/
+dbt_internal_packages/
+.user.yml
+package-lock.yml
