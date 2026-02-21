@@ -25,6 +25,8 @@ def ingest_csv_to_bronze(spark: SparkSession, file_name: str, table_name: str, s
         .option('header', 'true') \
         .option('inferSchema', 'true' if schema is None else 'false') \
         .option('encoding', 'UTF-8') \
+        .option('multiline', 'true') \
+        .option('escape', '"') \
         .csv(path=file_path, schema=schema)
     
     # Add metadata columns
