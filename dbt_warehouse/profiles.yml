@@ -5,7 +5,7 @@ local_trino_connection:
   outputs:
     dev:
       type: trino
-      host: http://localhost
+      host: "{{ env_var('TRINO_HOST', 'http://localhost') }}"
       database: iceberg
       schema: bronze
       port: 8080
