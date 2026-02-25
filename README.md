@@ -1,5 +1,30 @@
 # Lakehouse Project
 
+This a personal project that I made to try and get a better understanding of what a modern lakehouse tech stack looks like.
+
+## Architecture
+```
+                           ┌──────────────────────────────────────┐
+                           │           Apache Airflow             │
+                           └──────────────────────────────────────┘
+                                            │
+    ┌───────────────────────────────────────┼───────────────────────────────────────┐
+    │                                       │                                       │
+    ▼                                       ▼                                       ▼
+┌────────┐    ┌────────┐    ┌────────┐    ┌────────┐    ┌────────┐    ┌────────┐
+│ CSV    │───▶│ Spark  │───▶│ Bronze │───▶│  dbt   │───▶│ Silver │───▶│  Gold  │
+│ Files  │    │Ingest  │    │        │    │        │    │        │    │        │
+└────────┘    └────────┘    └────────┘    └────────┘    └────────┘    └────────┘
+                                 │                           │            │
+                                 └───────────────────────────┴────────────┘
+                                                   │
+                                    ┌──────────────┴──────────────┐
+                                    │     AWS S3 + Iceberg        │
+                                    │     Nessie Catalog          │
+                                    │     Trino Queries           │
+                                    └─────────────────────────────┘
+```
+
 ![Apache Airflow](https://img.shields.io/badge/Apache%20Airflow-017CEE?style=for-the-badge&logo=apacheairflow&logoColor=white)
 ![Apache Iceberg](https://img.shields.io/badge/Apache%20Iceberg-3A76F0?style=for-the-badge&logo=apacheiceberg&logoColor=white)
 ![Apache Spark](https://img.shields.io/badge/Apache%20Spark-E25A1C?style=for-the-badge&logo=apachespark&logoColor=white)
@@ -9,6 +34,17 @@
 ![Nessie](https://img.shields.io/badge/Nessie-4A9B6E?style=for-the-badge&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Trino](https://img.shields.io/badge/Trino-DD00A1?style=for-the-badge&logo=trino&logoColor=white)
+
+## Tech Stack
+| Component | Technology |
+|-----------|------------|
+| Storage | AWS S3 |
+| Table Format | Apache Iceberg |
+| Catalog | Nessie |
+| Query Engine | Trino |
+| Transformations | dbt |
+| Orchestration | Airflow |
+| Ingestion | PySpark |
 
 This is the start of building a production grade lakehouse, to learn, and show modern lakehouse design skills and patterns. The data used in this project was from Kaggle https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce.
 
