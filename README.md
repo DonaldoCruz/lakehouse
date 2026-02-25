@@ -1,6 +1,6 @@
 # Lakehouse Project
 
-This a personal project that I made to try and get a better understanding of what a modern lakehouse tech stack looks like.
+This is a personal lakehouse project, to learn, and show modern lakehouse design skills and patterns. The data used in this project was from Kaggle https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce.
 
 ## Architecture
 ```
@@ -45,8 +45,6 @@ This a personal project that I made to try and get a better understanding of wha
 | Transformations | dbt |
 | Orchestration | Airflow |
 | Ingestion | PySpark |
-
-This is the start of building a production grade lakehouse, to learn, and show modern lakehouse design skills and patterns. The data used in this project was from Kaggle https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce.
 
 ## Prerequisites
 * Java was required because Apache Spark requires a Java Virtual Machine (JVM)
