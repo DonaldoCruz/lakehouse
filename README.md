@@ -26,3 +26,5 @@ This is the start of building a production grade lakehouse, to learn, and show m
 
 # Orchestration - Apache Airflow 
 * The main reason why I went with Apache Airflow is because I wanted to get more experience with it, from setting it up using docker compose, to creating DAGs (Directed Acyclic Graphs) with many tasks.
+* 
+![Most recent Airflow Runs](./images/airflow.img)
