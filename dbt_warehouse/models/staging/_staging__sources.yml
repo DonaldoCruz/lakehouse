@@ -12,15 +12,39 @@ sources:
             data_tests:
               - unique
               - not_null
+          - name: order_purchase_timestamp
+            description: "The timestamp purchase"
+          - name: order_approved_at
+            description: "Payment approval timestamp."
+          - name: order_delivered_carrier_date
+            description: >
+              Shows when the order was given to the logistics partner.
+          - name: order_delivered_customer_date
+            description: Shows the actual order delivery date to the customer.
+          - name: order_estimated_delivery_date
+            description: > 
+              Shows the estimated delivery date that was informed to customer at the purchase moment.
       - name: customers
         description: "Customer information"
         columns:
           - name: customer_id
+            description: > 
+              Key ot the orders dataset. 
+              This value is not the actual customer ID, it is different for each individual order
             data_tests:
               - unique
               - not_null
+          - name: customer_unique_id
+            description: "Unique identifier of a customer."
       - name: order_items
         description: "Order line items"
+        columns: 
+          - name: order_id
+            description: "Unique identifier of the order."
+          - name: price
+            description: "Price of the product."
+          - name: freight_value
+            description: "Shipping cost of specific item."
       - name: products
         description: "Product catalog"
       - name: sellers
